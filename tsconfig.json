@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "dist",
+    "strict": true,
+    "pretty": true,
+    "sourceMap": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": true
+  },
+  "typedocOptions": {
+    "entryPoints": ["src/spotify.ts"],
+    "excludePrivate": true,
+    "out": "docs",
+    "theme": "node_modules/typedoc-darker-theme/bin/default/"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist"
+  ]
+}

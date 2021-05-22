@@ -1,0 +1,62 @@
+{
+  "name": "spotify-web-player",
+  "version": "0.1.0",
+  "description": "Spotify Web Playback API",
+  "keywords": [
+    "spotify",
+    "spotify-web-playback"
+  ],
+  "repository": "github:Symbitic/spotify-web-player",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "npm run build -- -w",
+    "build:types": "tsc --outDir dist --emitDeclarationOnly",
+    "doc": "typedoc",
+    "lint": "eslint --ext .js,.ts src",
+    "lint:fix": "eslint --fix --ext .js,.ts src",
+    "postbuild": "npm run build:types",
+    "types": "tsc --noEmit",
+    "types:watch": "npm run types -- --watch"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js|ts)": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-typescript": "^7.13.0",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@types/node": "14.14.10",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.3",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "rollup": "^2.48.0",
+    "typedoc": "^0.20.36",
+    "typedoc-darker-theme": "^1.1.5",
+    "typescript": "4.1.2"
+  }
+}

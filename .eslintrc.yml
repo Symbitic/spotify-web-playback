@@ -1,0 +1,21 @@
+---
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:import/typescript
+
+parser: "@typescript-eslint/parser"
+
+env:
+  browser: true
+  jest: true
+
+plugins:
+  - "@typescript-eslint/eslint-plugin"
+
+rules:
+  "@typescript-eslint/ban-ts-comment": off
+  "@typescript-eslint/explicit-module-boundary-types": off
+  "@typescript-eslint/no-explicit-any": off
+  "@typescript-eslint/no-inferrable-types": off
