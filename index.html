@@ -1,0 +1,177 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>spotify-web-playback</title>
+	<meta name="description" content="Documentation for spotify-web-playback">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json"
+				data-base=".">
+				<div class="field">
+					<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+					<input id="tsd-search-field" type="text" />
+				</div>
+				<ul class="results">
+					<li class="state loading">Preparing search index...</li>
+					<li class="state failure">The search index is not available</li>
+				</ul>
+				<a href="index.html" class="title">spotify-web-playback</a>
+			</div>
+			<div class="table-cell" id="tsd-widgets">
+				<div id="tsd-filter">
+					<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+					<div class="tsd-filter-group">
+						<div class="tsd-select" id="tsd-filter-visibility">
+							<span class="tsd-select-label">All</span>
+							<ul class="tsd-select-list">
+								<li data-value="public">Public</li>
+								<li data-value="protected">Public/Protected</li>
+								<li data-value="private" class="selected">All</li>
+							</ul>
+						</div>
+						<input type="checkbox" id="tsd-filter-inherited" checked />
+						<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						<input type="checkbox" id="tsd-filter-externals" checked />
+						<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+					</div>
+				</div>
+				<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>Project spotify-web-playback</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#spotify-web-playback" id="spotify-web-playback" style="color: inherit; text-decoration: none;">
+					<h1>Spotify Web Playback</h1>
+				</a>
+				<p>Spotify Web Playback is a TypeScript-enabled API for using the Spotify Web Playback SDK.</p>
+				<p>The Spotify Web Playback SDK enables developers to stream and play Spotify tracks
+					in any web browser that supports <a href="https://www.w3.org/TR/encrypted-media/">Encrypted Media Extensions</a>
+				(currently only FireFox, Google Chrome, and Microsoft Edge are supported).</p>
+				<p>See the <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/">Web Playback SDK Quick Start</a> for a quick introduction to the Web Playback SDK, and the <a href="https://developer.spotify.com/documentation/web-playback-sdk/reference/">Web Playback SDK Reference</a> for a more complete API reference.</p>
+				<a href="#setup" id="setup" style="color: inherit; text-decoration: none;">
+					<h2>Setup</h2>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">npm i -s spotify-web-player</span>
+</code></pre>
+				<p>or</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add spotify-web-player</span>
+</code></pre>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started</h2>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;SPOTIFY_TOKEN&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">uri</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;spotify:album:51QBkcL7S3KYdXSSA0zM9R&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">spotify</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SpotifyPlayer</span><span style="color: #000000">();</span>
+
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">spotify</span><span style="color: #000000">.</span><span style="color: #795E26">connect</span><span style="color: #000000">(</span><span style="color: #001080">token</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">spotify</span><span style="color: #000000">.</span><span style="color: #795E26">play</span><span style="color: #000000">(</span><span style="color: #001080">uri</span><span style="color: #000000">);</span>
+</code></pre>
+				<a href="#authorization" id="authorization" style="color: inherit; text-decoration: none;">
+					<h1>Authorization</h1>
+				</a>
+				<p><strong>This library does not handle obtaining a Spotify token. You have to take care of that yourself.</strong></p>
+				<p>You have two options:</p>
+				<ol>
+					<li>Click <a href="https://accounts.spotify.com/en/authorize?response_type=token&amp;client_id=adaaf209fb064dfab873a71817029e0d&amp;redirect_uri=https:%2F%2Fdeveloper.spotify.com%2Fdocumentation%2Fweb-playback-sdk%2Fquick-start%2F&amp;scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state&amp;show_dialog=true">here</a> to obtain a temporary token. You can pass it to your code, but be aware it will expire after one hour.</li>
+					<li>Use the Spotify Web API to obtain an access token. See <a href="https://gist.github.com/Symbitic/95c0f4321b310be3a86eb0adf4a268ff">this gist</a> for a full example of how to obtain a Spotify token in a web application. This workflow is highly recommended for production apps.</li>
+				</ol>
+				<p>An example of #2 is included. Please see <a href="demo.mjs">demo.mjs</a> and <a href="public/demo.mjs">public/demo.mjs</a> for more information.
+				Set <code>CLIENT_ID</code> and <code>CLIENT_SECRET</code> then run <code>npm run demo</code> and open <code>http://localhost:8989/</code> to view the demo.</p>
+				<a href="#acknowledgements" id="acknowledgements" style="color: inherit; text-decoration: none;">
+					<h2>Acknowledgements</h2>
+				</a>
+				<p>Much of the inspiration for this API comes from Gil Barbara&#39;s <a href="https://github.com/gilbarbara/react-spotify-web-playback">react-spotify-web-playback</a>.</p>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>Licensed under the <a href="https://spdx.org/licenses/MIT">MIT</a> license. See <a href="LICENSE.md">LICENSE.md</a> for more details.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/spotifyplayer.html" class="tsd-kind-icon">Spotify<wbr>Player</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spotifyartist.html" class="tsd-kind-icon">Spotify<wbr>Artist</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spotifydevice.html" class="tsd-kind-icon">Spotify<wbr>Device</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spotifyimage.html" class="tsd-kind-icon">Spotify<wbr>Image</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spotifyplayoptions.html" class="tsd-kind-icon">Spotify<wbr>Play<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spotifyplayerstatus.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spotifyplayertrack.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Track</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span
+				class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span
+				class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span
+				class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span
+				class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span
+				class="tsd-kind-icon">Protected method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
