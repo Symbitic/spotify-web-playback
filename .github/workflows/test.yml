@@ -1,4 +1,4 @@
-name: Docs
+name: Test
 
 on:
   push:
@@ -34,11 +34,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Typedoc
-        run: npm run doc
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/
+      - name: Build
+        run: npm run build
