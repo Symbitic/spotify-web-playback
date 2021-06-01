@@ -48,7 +48,7 @@ function loadSpotifyPlayer(): Promise<any> {
 }
 
 /**
- * Spotify web player.
+ * Spotify Web Player.
  */
 export class SpotifyPlayer {
   private readonly _baseUrl = 'https://api.spotify.com/v1/me';
