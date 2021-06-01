@@ -14,31 +14,37 @@ export type SpotifyPlayerCallback = (token: string) => void;
 export interface SpotifyDevice {
   /** Device ID. */
   id: string;
-  is_active: boolean;
-  is_private_session: boolean;
-  is_restricted: boolean;
   /** Device name. */
   name: string;
-  /** Device type. */
+  /** Device type, such as "Computer", "Smartphone", or "Speaker". */
   type: string;
   /** Volume level (as a percentage between `0` and `100`). */
   volume_percent: number;
+  /** Indicates if this device is the user's currently active device. */
+  is_active: boolean;
+  /** Indicates if this device is currently in a private session. */
+  is_private_session: boolean;
+  /** Indicates if this device is restricted from accepting Web API commands. */
+  is_restricted: boolean;
 }
 
 /**
  * An artist on Spotify.
  */
 export interface SpotifyArtist {
-  external_urls: {
-    spotify: string;
-  };
-  href: string;
   /** Artist ID. */
   id: string;
   /** Artist name. */
   name: string;
-  type: string;
+  /** Artist URI. */
   uri: string;
+  external_urls: {
+    /** The open.spotify.com URL. */
+    spotify: string;
+  };
+  /** The Web API endpoint providing full details of the artist. */
+  href: string;
+  type: string;
 }
 
 /**
@@ -53,18 +59,77 @@ export interface SpotifyImage {
   url: string;
 }
 
-export interface SpotifyPlayOptions {
-  context_uri?: string;
-  deviceId: string;
-  offset?: number;
-  uris?: string[];
-}
+/**
+ * A Spotify album.
+ */
+export interface SpotifyAlbum {
+  /** Album ID. */
+  id: string;
+  /** Album name. */
+  name: string;
+  type: string; // 'artist'
+  /** Album type. */
+  album_type: string; // 'album' | 'single' | 'compilation'
+  /** List of artists for this album. */
+  artists: SpotifyArtist[];
+  /** List of markets this track is available in. */
+  available_markets: string[];
+  /** Web browser URLs. */
+  external_urls: {
+    /** The open.spotify.com URL. */
+    spotify: string;
+  };
+  /** The api.spotify.com URL. */
+  href: string;
+  /** List of images for this album. */
+  images: SpotifyImage[];
+  /** Release date (YYYY-MM-DD). */
+  release_date: string;
+  /** The precision with which the release date is known. */
+  release_date_precision: 'year' | 'month' | 'day';
+  /** Number of tracks in this album. */
+  total_tracks: number;
+  uri: string;
+};
+
+export interface SpotifyTrack {
+  /** Album information. */
+  album: SpotifyAlbum;
+  /** List of artists. */
+  artists: SpotifyArtist[];
+  /** List of markets this track is available in. */
+  available_markets: string[];
+  /** The disc number (set to 1 unless the album has more than one disc). */
+  disc_number: number;
+  /** Track length in milliseconds. */
+  duration_ms: number;
+  /** Indicates if this track has explicit material. */
+  explicit: false;
+  external_ids: {
+    isrc: string;
+  };
+  external_urls: {
+    spotify: string;
+  };
+  href: string;
+  id: string;
+  /** Indicates if this track is a local file or not. */
+  is_local: false;
+  /** The popularity of this album (`0` to `100`). */
+  popularity: number;
+  preview_url: string;
+  track_number: number;
+  type: string;
+  uri: string;
+};
 
 /**
  * Status of a Spotify player.
  */
 export interface SpotifyPlayerStatus {
+  name: string;
   actions: {
+    /** Indicates which actions are not allowed. */
     disallows: {
       resuming: boolean;
       skipping_prev: boolean;
@@ -72,52 +137,19 @@ export interface SpotifyPlayerStatus {
   };
   /** @hidden */
   context: null;
-  currently_playing_type: string;
+  /** The object type of the currently playing item. */
+  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
   /** Current device. */
   device: SpotifyDevice;
+  /** Indicates if something is currently playing. */
   is_playing: boolean;
-  item: {
-    album: {
-      album_type: string;
-      artists: SpotifyArtist[];
-      available_markets: string[];
-      external_urls: {
-        spotify: string;
-      };
-      href: string;
-      id: string;
-      images: SpotifyImage[];
-      name: string;
-      release_date: string;
-      release_date_precision: string;
-      total_tracks: number;
-      type: string;
-      uri: string;
-    };
-    artists: SpotifyArtist[];
-    available_markets: string[];
-    disc_number: number;
-    duration_ms: number;
-    explicit: false;
-    external_ids: {
-      isrc: string;
-    };
-    external_urls: {
-      spotify: string;
-    };
-    href: string;
-    id: string;
-    is_local: false;
-    name: string;
-    popularity: number;
-    preview_url: string;
-    track_number: number;
-    type: string;
-    uri: string;
-  };
+  /** The currently active track. */
+  item: SpotifyTrack;
   /** Progress (in milliseconds). */
   progress_ms: number;
-  repeat_state: string;
+  /** What (if anything) is being repeated. */
+  repeat_state: 'off' | 'track' | 'context';
+  /** Indicates if shuffle mode is on. */
   shuffle_state: false;
   /** Timestamp. */
   timestamp: number;
