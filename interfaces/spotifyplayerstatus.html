@@ -99,6 +99,8 @@
 								class="tsd-kind-icon">is_<wbr>playing</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayerstatus.html#item"
 								class="tsd-kind-icon">item</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayerstatus.html#name"
+								class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayerstatus.html#progress_ms"
 								class="tsd-kind-icon">progress_<wbr>ms</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayerstatus.html#repeat_state"
@@ -120,7 +122,7 @@
 					<div class="tsd-signature tsd-kind-icon">actions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>disallows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>resuming<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>skipping_prev<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L67">spotify-types.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L131">spotify-types.ts:131</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -128,6 +130,11 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
 								<h5>disallows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>resuming<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>skipping_prev<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Indicates which actions are not allowed.</p>
+									</div>
+								</div>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter">
 										<h5>resuming<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
@@ -143,12 +150,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="currently_playing_type" class="tsd-anchor"></a>
 					<h3>currently_<wbr>playing_<wbr>type</h3>
-					<div class="tsd-signature tsd-kind-icon">currently_<wbr>playing_<wbr>type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">currently_<wbr>playing_<wbr>type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;track&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;episode&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ad&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unknown&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L75">spotify-types.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L141">spotify-types.ts:141</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The object type of the currently playing item.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="device" class="tsd-anchor"></a>
@@ -156,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">device<span class="tsd-signature-symbol">:</span> <a href="spotifydevice.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyDevice</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L77">spotify-types.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L143">spotify-types.ts:143</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -171,131 +183,39 @@
 					<div class="tsd-signature tsd-kind-icon">is_<wbr>playing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L78">spotify-types.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L145">spotify-types.ts:145</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates if something is currently playing.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="item" class="tsd-anchor"></a>
 					<h3>item</h3>
-					<div class="tsd-signature tsd-kind-icon">item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>album<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>album_type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>artists<span class="tsd-signature-symbol">: </span><a href="spotifyartist.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyArtist</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>available_markets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>external_urls<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>images<span class="tsd-signature-symbol">: </span><a href="spotifyimage.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyImage</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>release_date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>release_date_precision<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>total_tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>artists<span class="tsd-signature-symbol">: </span><a href="spotifyartist.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyArtist</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>available_markets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>disc_number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>duration_ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>explicit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">; </span>external_ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>isrc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>external_urls<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>is_local<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>popularity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>preview_url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>track_number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">item<span class="tsd-signature-symbol">:</span> <a href="spotifytrack.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyTrack</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L79">spotify-types.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L147">spotify-types.ts:147</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>album<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>album_type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>artists<span class="tsd-signature-symbol">: </span><a href="spotifyartist.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyArtist</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>available_markets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>external_urls<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>images<span class="tsd-signature-symbol">: </span><a href="spotifyimage.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyImage</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>release_date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>release_date_precision<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>total_tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
-								<ul class="tsd-parameters">
-									<li class="tsd-parameter">
-										<h5>album_<wbr>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>artists<span class="tsd-signature-symbol">: </span><a href="spotifyartist.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyArtist</a><span class="tsd-signature-symbol">[]</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>available_<wbr>markets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>external_<wbr>urls<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
-										<ul class="tsd-parameters">
-											<li class="tsd-parameter">
-												<h5>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-											</li>
-										</ul>
-									</li>
-									<li class="tsd-parameter">
-										<h5>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>images<span class="tsd-signature-symbol">: </span><a href="spotifyimage.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyImage</a><span class="tsd-signature-symbol">[]</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>release_<wbr>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>release_<wbr>date_<wbr>precision<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>total_<wbr>tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-									<li class="tsd-parameter">
-										<h5>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-								</ul>
-							</li>
-							<li class="tsd-parameter">
-								<h5>artists<span class="tsd-signature-symbol">: </span><a href="spotifyartist.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyArtist</a><span class="tsd-signature-symbol">[]</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>available_<wbr>markets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>disc_<wbr>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>duration_<wbr>ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>explicit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>external_<wbr>ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>isrc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
-								<ul class="tsd-parameters">
-									<li class="tsd-parameter">
-										<h5>isrc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-								</ul>
-							</li>
-							<li class="tsd-parameter">
-								<h5>external_<wbr>urls<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
-								<ul class="tsd-parameters">
-									<li class="tsd-parameter">
-										<h5>spotify<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-									</li>
-								</ul>
-							</li>
-							<li class="tsd-parameter">
-								<h5>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>is_<wbr>local<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>popularity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>preview_<wbr>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>track_<wbr>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-						</ul>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The currently active track.</p>
+						</div>
 					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L130">spotify-types.ts:130</a></li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="progress_ms" class="tsd-anchor"></a>
@@ -303,7 +223,7 @@
 					<div class="tsd-signature tsd-kind-icon">progress_<wbr>ms<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L119">spotify-types.ts:119</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L149">spotify-types.ts:149</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -315,12 +235,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="repeat_state" class="tsd-anchor"></a>
 					<h3>repeat_<wbr>state</h3>
-					<div class="tsd-signature tsd-kind-icon">repeat_<wbr>state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">repeat_<wbr>state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;track&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;off&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;context&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L120">spotify-types.ts:120</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L151">spotify-types.ts:151</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>What (if anything) is being repeated.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="shuffle_state" class="tsd-anchor"></a>
@@ -328,9 +253,14 @@
 					<div class="tsd-signature tsd-kind-icon">shuffle_<wbr>state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L121">spotify-types.ts:121</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L153">spotify-types.ts:153</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates if shuffle mode is on.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="timestamp" class="tsd-anchor"></a>
@@ -338,7 +268,7 @@
 					<div class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/e13ad3e/src/spotify-types.ts#L123">spotify-types.ts:123</a></li>
+							<li>Defined in <a href="https://github.com/Symbitic/spotify-web-playback/blob/0e6b9a7/src/spotify-types.ts#L155">spotify-types.ts:155</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -363,6 +293,9 @@
 						<a href="../classes/spotifyplayer.html" class="tsd-kind-icon">Spotify<wbr>Player</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="spotifyalbum.html" class="tsd-kind-icon">Spotify<wbr>Album</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="spotifyartist.html" class="tsd-kind-icon">Spotify<wbr>Artist</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -370,9 +303,6 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="spotifyimage.html" class="tsd-kind-icon">Spotify<wbr>Image</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="spotifyplayoptions.html" class="tsd-kind-icon">Spotify<wbr>Play<wbr>Options</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -395,6 +325,9 @@
 								<a href="spotifyplayerstatus.html#item" class="tsd-kind-icon">item</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="spotifyplayerstatus.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="spotifyplayerstatus.html#progress_ms" class="tsd-kind-icon">progress_<wbr>ms</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -412,6 +345,9 @@
 				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="spotifyplayertrack.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Track</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="spotifytrack.html" class="tsd-kind-icon">Spotify<wbr>Track</a>
 					</li>
 				</ul>
 			</nav>
