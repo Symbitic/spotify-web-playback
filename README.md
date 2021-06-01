@@ -6,6 +6,8 @@ The Spotify Web Playback SDK enables developers to stream and play Spotify track
 in any web browser that supports [Encrypted Media Extensions](https://www.w3.org/TR/encrypted-media/)
 (currently only FireFox, Google Chrome, and Microsoft Edge are supported).
 
+Read the documentation [here](https://symbitic.github.io/spotify-web-playback/).
+
 See the [Web Playback SDK Quick Start](https://developer.spotify.com/documentation/web-playback-sdk/quick-start/) for a quick introduction to the Web Playback SDK, and the [Web Playback SDK Reference](https://developer.spotify.com/documentation/web-playback-sdk/reference/) for a more complete API reference.
 
 ## Setup
