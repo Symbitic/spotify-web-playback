@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/Symbitic/spotify-web-playback/compare/v0.2.0...v1.0.0) (2021-06-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* update type documentation
+
+* update type documentation ([51591b3](https://github.com/Symbitic/spotify-web-playback/commit/51591b3a699c1c1d12ee311715a45b670261f8fc))
+
 ## [0.2.0](https://github.com/Symbitic/spotify-web-playback/compare/v0.1.2...v0.2.0) (2021-06-01)
 
 
