@@ -1,6 +1,6 @@
-# Spotify Web Player
+# Spotify Web Playback
 
-Spotify Web Player is a TypeScript-enabled API for using the Spotify Web Playback SDK.
+Spotify Web Playback is a TypeScript-enabled API for using the Spotify Web Playback SDK.
 
 The Spotify Web Playback SDK enables developers to stream and play Spotify tracks
 in any web browser that supports [Encrypted Media Extensions](https://www.w3.org/TR/encrypted-media/)
@@ -42,6 +42,9 @@ You have two options:
 
 1. Click [here] to obtain a temporary token. You can pass it to your code, but be aware it will expire after one hour.
 2. Use the Spotify Web API to obtain an access token. See [this gist] for a full example of how to obtain a Spotify token in a web application. This workflow is highly recommended for production apps.
+
+An example of #2 is included. Please see [demo.mjs](demo.mjs) and [public/demo.mjs](public/demo.mjs) for more information.
+Set `CLIENT_ID` and `CLIENT_SECRET` then run `npm run demo` and open `http://localhost:8989/` to view the demo.
 
 ## Acknowledgements
 

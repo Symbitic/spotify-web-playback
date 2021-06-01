@@ -26,16 +26,16 @@ const EMPTY_TRACK: SpotifyPlayerTrack = {
 /** @hidden */
 function loadSpotifyPlayer(): Promise<any> {
   return new Promise<void>((resolve, reject) => {
-    const scriptTag = document.getElementById("spotify-player");
+    const scriptTag = document.getElementById('spotify-player');
 
     if (!scriptTag) {
-      const script = document.createElement("script");
+      const script = document.createElement('script');
 
-      script.id = "spotify-player";
-      script.type = "text/javascript";
+      script.id = 'spotify-player';
+      script.type = 'text/javascript';
       script.async = false;
       script.defer = true;
-      script.src = "https://sdk.scdn.co/spotify-player.js";
+      script.src = 'https://sdk.scdn.co/spotify-player.js';
       script.onload = () => resolve();
       script.onerror = (error: any) =>
         reject(new Error(`loadScript: ${error.message}`));
@@ -64,7 +64,7 @@ export class SpotifyPlayer {
   private _errorType: WebPlaybackErrors | '' = '';
   private _position: number = 0;
   private _track: SpotifyPlayerTrack = EMPTY_TRACK;
-  
+
   /**
    * Required scopes for a token.
    */
@@ -163,7 +163,7 @@ export class SpotifyPlayer {
 
   /**
    * Wait for the player to connect and emit the 'ready' signal.
-   * 
+   *
    * @returns Promise that resolves to a boolean indicating if the connection
    * was successful.
    */
@@ -191,7 +191,7 @@ export class SpotifyPlayer {
     this._player.addListener('playback_error', (error: WebPlaybackError) => {
       this.handlePlayerErrors('playback_error', error)
     });
-    
+
     const deviceConnected = (deviceId: string) => {
       this._deviceId = deviceId;
       this._ready = true;
@@ -211,7 +211,7 @@ export class SpotifyPlayer {
         deviceDisconnected();
         resolve(false);
       });
-      
+
       player.connect()
         //.then((ret: boolean) => resolve(ret));
     });
@@ -258,7 +258,7 @@ export class SpotifyPlayer {
         offset: position
       });
     }
-  
+
     await fetch(`${this._baseUrl}/player/play?device_id=${this._deviceId}`, {
       method: 'PUT',
       body,
@@ -294,7 +294,7 @@ export class SpotifyPlayer {
       }
     });
   }
-  
+
   /**
    * Skip to the next track.
    */
@@ -361,7 +361,7 @@ export class SpotifyPlayer {
    */
   async getTracksStatus(tracks: string | string[]): Promise<boolean[]> {
     const ids = Array.isArray(tracks) ? tracks : [tracks];
-  
+
     const response = await fetch(`${this._baseUrl}/tracks/contains?ids=${ids}`, {
       method: 'GET',
       headers: {
@@ -386,7 +386,7 @@ export class SpotifyPlayer {
       },
     });
   }
-  
+
   /**
    * Set the current volume level
    * @param volume Volume percentage from 0 to 100.

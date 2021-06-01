@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spotify Web Playback SDK Example</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<style type="text/css">
+#connect, #play {
+  display: none;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Spotify Web Playback SDK Example</h1>
+
+  <div id="login">
+    <h2>Login with Spotify to get started</h2>
+    <a id="login-button" href="/login" class="btn btn-primary">Log in with Spotify</a>
+  </div>
+
+  <div id="connect">
+    <h2>Connect to Spotify</h2>
+    <button id="connect-button">Connect</button>
+    <div id="connect-message"></div>
+  </div>
+
+  <div id="play">
+    <h2>Hit Pause or Play to control the Spotify album</h2>
+    <button id="play-button">Play</button>
+    <button id="pause-button">Pause</button>
+  </div>
+</div>
+<script src="demo.mjs" type="module"></script>
+</body>
+</html>
