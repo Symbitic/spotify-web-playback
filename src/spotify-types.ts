@@ -1,4 +1,6 @@
-// https://developer.spotify.com/documentation/web-playback-sdk/reference/
+/**
+ * @todo https://developer.spotify.com/documentation/web-playback-sdk/reference/
+ */
 
 /** @hidden */
 type SpotifyPlayerMethod<T = void> = () => Promise<T>;
