@@ -1,17 +1,18 @@
 import {
-  SpotifyDevice,
-  SpotifyPlayerCallback,
   SpotifyPlayerStatus,
   SpotifyPlayerTrack,
+  SpotifyPlaylist,
   WebPlaybackAlbum,
+  WebPlaybackCallback,
   WebPlaybackError,
   WebPlaybackErrors,
   WebPlaybackImage,
   WebPlaybackPlayer,
-  WebPlaybackState,
+  WebPlaybackState
 } from './spotify-types';
 
 export * from './spotify-types';
+// TODO: use `export type {}` for only types needed.
 
 /** @hidden */
 const EMPTY_TRACK: SpotifyPlayerTrack = {
@@ -64,11 +65,14 @@ export class SpotifyPlayer {
   private _errorType: WebPlaybackErrors | '' = '';
   private _position: number = 0;
   private _track: SpotifyPlayerTrack = EMPTY_TRACK;
+  private _playlists: SpotifyPlaylist[] = [];
 
   /**
    * Required scopes for a token.
    */
   readonly scopes = [
+    'playlist-read-collaborative',
+    'playlist-read-private',
     'streaming',
     'user-read-email',
     'user-read-private',
@@ -121,6 +125,15 @@ export class SpotifyPlayer {
   }
 
   /**
+   * A list of playlists owned by the user.
+   *
+   * Call {@link getUsersPlaylists} to populate this list.
+   */
+  get playlists() {
+    return this._playlists;
+  }
+
+  /**
    * Create a new SpotifyPlayer instance.
    * @param name Player name.
    * @param volume Volume level. (default = 1.0)
@@ -153,7 +166,7 @@ export class SpotifyPlayer {
     this._player = new window.Spotify.Player({
       name,
       volume,
-      getOAuthToken: (cb: SpotifyPlayerCallback) => {
+      getOAuthToken: (cb: WebPlaybackCallback) => {
         cb(token);
       },
     }) as WebPlaybackPlayer;
@@ -247,16 +260,24 @@ export class SpotifyPlayer {
       });
     } else if (items)  {
       const isArtist = items.indexOf('artist') >= 0;
+      const isTrack = items.indexOf('track') >= 0;
       let position;
 
       if (!isArtist) {
         position = { position: offset };
       }
 
-      body = JSON.stringify({
-        context_uri: items,
-        offset: position
-      });
+      if (isTrack) {
+        body = JSON.stringify({
+          uris: [ items ],
+          offset: position
+        });
+      } else {
+        body = JSON.stringify({
+          context_uri: items,
+          offset: position
+        });
+      }
     }
 
     await fetch(`${this._baseUrl}/player/play?device_id=${this._deviceId}`, {
@@ -310,6 +331,7 @@ export class SpotifyPlayer {
 
   /**
    * Seek to position.
+   * @param position Starting position (in milliseconds).
    */
   async seek(position: number) {
     await fetch(
@@ -322,21 +344,6 @@ export class SpotifyPlayer {
         }
       }
     );
-  }
-
-  /**
-   * Get a list of all a user's devices.
-   */
-  async getDevices(): Promise<SpotifyDevice[]> {
-    const response = await fetch(`${this._baseUrl}/player/devices`, {
-      headers: {
-        Authorization: `Bearer ${this._token}`,
-        'Content-Type': 'application/json',
-      },
-      method: 'GET',
-    });
-    const { devices } = await response.json();
-    return devices;
   }
 
   /**
@@ -357,34 +364,83 @@ export class SpotifyPlayer {
   }
 
   /**
-   * Check if a track or a list of tracks is saved in the user's library.
+   * Get a list of playlists owned by the current user.
    */
-  async getTracksStatus(tracks: string | string[]): Promise<boolean[]> {
-    const ids = Array.isArray(tracks) ? tracks : [tracks];
+  async getUsersPlaylists(): Promise<SpotifyPlaylist[]> {
+    let url = `${this._baseUrl}/playlists?limit=50`;
+    let items: any = [];
+    let playlists: SpotifyPlaylist[] = [];
 
-    const response = await fetch(`${this._baseUrl}/tracks/contains?ids=${ids}`, {
-      method: 'GET',
+    // Get list of playlists.
+    while (true) {
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${this._token}`
+        }
+      });
+      const data = await response.json();
+      items = items.concat(data.items);
+      if (data.next === null) {
+        break;
+      }
+      url = data.next;
+    }
+
+    // Get playlist items.
+    for (let item of items) {
+      let url = `${item.tracks.href}?limit=100`;
+      let tracks: any = [];
+      while (true) {
+        const response = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${this._token}`
+          }
+        });
+        const data = await response.json();
+        tracks = tracks.concat(data.items);
+        if (data.next === null) {
+          break;
+        }
+        url = data.next;
+      }
+      const playlist = {
+        id: item.id,
+        images: item.images,
+        name: item.name,
+        tracks: tracks
+      };
+      playlists.push(playlist);
+    }
+
+    // Get user's favorites.
+    const response = await fetch(`${this._baseUrl}/tracks?limit=50`, {
       headers: {
-        'Authorization': `Bearer ${this._token}`,
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${this._token}`
       }
     });
-    return response.json();
-  }
+    const data = await response.json();
 
-  /**
-   * @TODO Not sure if this needs to be public or not.
-   * https://developer.spotify.com/documentation/web-api/reference/#endpoint-transfer-a-users-playback
-   */
-  setDevice(deviceId: string, shouldPlay?: boolean) {
-    return fetch(`${this._baseUrl}/player`, {
-      method: 'PUT',
-      body: JSON.stringify({ device_ids: [ deviceId ], play: shouldPlay }),
-      headers: {
-        'Authorization': `Bearer ${this._token}`,
-        'Content-Type': 'application/json'
-      },
-    });
+    const favorites = {
+      name: 'Your Music',
+      tracks: data.items
+    };
+
+    // Set "Your Music" first.
+    playlists = [ favorites, ...playlists ];
+
+    playlists = playlists.map((item: any) => ({
+      name: item.name,
+      tracks: item.tracks.map(({ track }: any) => ({
+        artists: track.artists.map(({ id, name }: any) => ({ id, name })),
+        duration: track.duration_ms,
+        id: track.id,
+        image: track.album.images.find(() => true),
+        name: track.name,
+        uri: track.uri
+      }))
+    }));
+
+    return playlists;
   }
 
   /**
@@ -396,12 +452,13 @@ export class SpotifyPlayer {
     await fetch(url, {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${this._token}`,
+        'Authorization': `Bearer ${this._token}`,
         'Content-Type': 'application/json',
       }
     });
   }
 
+  /** @hidden */
   private getAlbumImage(album: WebPlaybackAlbum) {
     const width = Math.min(...album.images.map((d) => d.width));
     const thumb: WebPlaybackImage =
@@ -410,6 +467,7 @@ export class SpotifyPlayer {
     return thumb.url;
   }
 
+  /** @hidden */
   private async handlePlayerStateChanges(state: WebPlaybackState | null) {
     if (!state) {
       this._track = EMPTY_TRACK;
@@ -439,6 +497,7 @@ export class SpotifyPlayer {
     };
   }
 
+  /** @hidden */
   private handlePlayerErrors(type: WebPlaybackErrors | '', error: WebPlaybackError) {
     this._error = error.message;
     this._errorType = type;

@@ -26,6 +26,8 @@ function login(_req, res) {
 
   // your application requests authorization
   const scope = [
+    'playlist-read-collaborative',
+    'playlist-read-private',
     'streaming',
     'user-read-email',
     'user-read-private',

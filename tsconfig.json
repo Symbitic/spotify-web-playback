@@ -3,7 +3,7 @@
     "target": "es2018",
     "module": "esnext",
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "declarationDir": "dist",
     "strict": true,
     "pretty": true,
@@ -19,6 +19,7 @@
     "allowJs": true
   },
   "typedocOptions": {
+    "disableSources": true,
     "entryPoints": ["src/spotify.ts"],
     "excludePrivate": true,
     "out": "docs",
@@ -28,6 +29,7 @@
     "src"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "node_modules"
   ]
 }

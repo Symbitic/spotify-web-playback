@@ -2,7 +2,7 @@ import SpotifyPlayer from './index.mjs';
 
 let token = '';
 
-const uri = 'spotify:album:51QBkcL7S3KYdXSSA0zM9R';
+let uri = 'spotify:track:54flyrjcdnQdco7300avMJ';
 
 const loginEl = document.getElementById('login');
 const playEl = document.getElementById('play');
@@ -28,6 +28,12 @@ connectButtonEl.addEventListener('click', async () => {
   try {
     const ret = await spotify.connect(token);
     if (ret) {
+      const playlists = await spotify.getUsersPlaylists();
+
+      // Play a random track from the user's favorites.
+      const idx = Math.floor(Math.random() * playlists[0].tracks.length)
+      uri = playlists[0].tracks[idx].uri;
+
       playEl.style.display = 'initial';
       connectEl.style.display = 'none';
     } else {
