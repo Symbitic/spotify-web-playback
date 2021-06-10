@@ -82,6 +82,13 @@ export class SpotifyPlayer {
   ];
 
   /**
+   * The Spotify authorization token.
+   */
+  get token() {
+    return this._token;
+  }
+
+  /**
    * Indicates if a media is playing.
    */
   get playing() {
