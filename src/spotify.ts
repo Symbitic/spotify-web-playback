@@ -25,7 +25,7 @@ const EMPTY_TRACK: SpotifyPlayerTrack = {
 };
 
 /** @hidden */
-function loadSpotifyPlayer(): Promise<any> {
+function loadSpotifyPlayer(): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const scriptTag = document.getElementById('spotify-player');
 
@@ -38,8 +38,7 @@ function loadSpotifyPlayer(): Promise<any> {
       script.defer = true;
       script.src = 'https://sdk.scdn.co/spotify-player.js';
       script.onload = () => resolve();
-      script.onerror = (error: any) =>
-        reject(new Error(`loadScript: ${error.message}`));
+      script.onerror = () => reject(new Error('Error loading spotify-player.js'));
 
       document.head.appendChild(script);
     } else {
