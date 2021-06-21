@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Symbitic/spotify-web-playback/compare/v1.0.0...v1.1.0) (2021-06-21)
+
+
+### Features
+
+* add playlists ([0a5c2ba](https://github.com/Symbitic/spotify-web-playback/commit/0a5c2badc6b41e620117fd0fa5e00251bb63156d))
+* add token property to SpotifyPlayer ([e5c7093](https://github.com/Symbitic/spotify-web-playback/commit/e5c709327bbae638b6e3c811f1faba5634876344))
+
+
+### Bug Fixes
+
+* use correct onerror() handler ([5749953](https://github.com/Symbitic/spotify-web-playback/commit/5749953e1c78c6cd0ab6a0c4f659800d6afa54b9))
+
 ## [1.0.0](https://github.com/Symbitic/spotify-web-playback/compare/v0.2.0...v1.0.0) (2021-06-01)
 
 
