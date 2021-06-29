@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Symbitic/spotify-web-playback/compare/v1.1.0...v1.2.0) (2021-06-29)
+
+
+### Features
+
+* add setToken ([5016249](https://github.com/Symbitic/spotify-web-playback/commit/501624949434644d56fc5116beaf3970261a4f81))
+
 ## [1.1.0](https://github.com/Symbitic/spotify-web-playback/compare/v1.0.0...v1.1.0) (2021-06-21)
 
 
