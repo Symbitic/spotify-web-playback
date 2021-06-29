@@ -450,6 +450,16 @@ export class SpotifyPlayer {
   }
 
   /**
+   * Change the Spotify access token.
+   *
+   * Useful for handling refreshes.
+   * @param token New access token.
+   */
+  setToken(token: string) {
+    this._token = token;
+  }
+
+  /**
    * Set the current volume level
    * @param volume Volume percentage from 0 to 100.
    */
