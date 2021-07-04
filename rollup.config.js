@@ -8,12 +8,6 @@ export default {
   input: 'src/index.ts',
   output: [
     {
-      file: pkg.main,
-      format: 'umd',
-      name: 'SpotifyPlayer',
-      exports: 'default'
-    },
-    {
       file: pkg.module,
       format: 'esm'
     }

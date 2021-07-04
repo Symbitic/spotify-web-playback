@@ -7,7 +7,6 @@
     "spotify-web-playback"
   ],
   "repository": "github:Symbitic/spotify-web-playback",
-  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
