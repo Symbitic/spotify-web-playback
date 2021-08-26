@@ -18,7 +18,7 @@ or
 
     yarn add spotify-web-playback
 
-Deno or web browser users can use:
+Web browsers can use:
 
 ```javascript
 import Spotify from 'https://esm.sh/spotify-web-playback';
