@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SpotifyPlayerTrack
+	<title>SpotifyPlaylist
 	| spotify-web-playback</title>
 	<meta name="description" content="Documentation for spotify-web-playback">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,28 +57,21 @@
 					<a href="../modules.html">spotify-web-playback</a>
 				</li>
 				<li>
-					<a href="spotifyplayertrack.html">SpotifyPlayerTrack</a>
+					<a href="SpotifyPlaylist.html">SpotifyPlaylist</a>
 				</li>
 			</ul>
-			<h1>Interface SpotifyPlayerTrack</h1>
+			<h1>Interface SpotifyPlaylist</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A Spotify track.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SpotifyPlayerTrack</span>
+						<span class="target">SpotifyPlaylist</span>
 					</li>
 				</ul>
 			</section>
@@ -89,18 +82,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayertrack.html#artists"
-								class="tsd-kind-icon">artists</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayertrack.html#duration"
-								class="tsd-kind-icon">duration</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayertrack.html#id"
-								class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayertrack.html#image"
-								class="tsd-kind-icon">image</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayertrack.html#name"
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="SpotifyPlaylist.html#name"
 								class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spotifyplayertrack.html#uri"
-								class="tsd-kind-icon">uri</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="SpotifyPlaylist.html#tracks"
+								class="tsd-kind-icon">tracks</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,54 +94,6 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="artists" class="tsd-anchor"></a>
-					<h3>artists</h3>
-					<div class="tsd-signature tsd-kind-icon">artists<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>List of artist names.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="duration" class="tsd-anchor"></a>
-					<h3>duration</h3>
-					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Duration in milliseconds.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Track unique ID.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="image" class="tsd-anchor"></a>
-					<h3>image</h3>
-					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Track image URL.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="name" class="tsd-anchor"></a>
 					<h3>name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
@@ -164,19 +101,19 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Track name.</p>
+							<p>The name of the playlist.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="uri" class="tsd-anchor"></a>
-					<h3>uri</h3>
-					<div class="tsd-signature tsd-kind-icon">uri<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="tracks" class="tsd-anchor"></a>
+					<h3>tracks</h3>
+					<div class="tsd-signature tsd-kind-icon">tracks<span class="tsd-signature-symbol">:</span> <a href="SpotifyPlaylistTrack.html" class="tsd-signature-type" data-tsd-kind="Interface">SpotifyPlaylistTrack</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The Spotify URI for the track.</p>
+							<p>Playlist items.</p>
 						</div>
 					</div>
 				</section>
@@ -193,61 +130,76 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
-						<a href="../enums/spotifydevicetype.html" class="tsd-kind-icon">Spotify<wbr>Device<wbr>Type</a>
+						<a href="../enums/SpotifyDeviceType.html" class="tsd-kind-icon">Spotify<wbr>Device<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/spotifyplayer.html" class="tsd-kind-icon">Spotify<wbr>Player</a>
+						<a href="../classes/SpotifyPlayer.html" class="tsd-kind-icon">Spotify<wbr>Player</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="spotifyalbum.html" class="tsd-kind-icon">Spotify<wbr>Album</a>
+						<a href="SpotifyAlbum.html" class="tsd-kind-icon">Spotify<wbr>Album</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="spotifyartist.html" class="tsd-kind-icon">Spotify<wbr>Artist</a>
+						<a href="SpotifyArtist.html" class="tsd-kind-icon">Spotify<wbr>Artist</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="spotifydevice.html" class="tsd-kind-icon">Spotify<wbr>Device</a>
+						<a href="SpotifyDevice.html" class="tsd-kind-icon">Spotify<wbr>Device</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="spotifyimage.html" class="tsd-kind-icon">Spotify<wbr>Image</a>
+						<a href="SpotifyImage.html" class="tsd-kind-icon">Spotify<wbr>Image</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="spotifyplayerstatus.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Status</a>
+						<a href="SpotifyPlayerStatus.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="SpotifyPlayerTrack.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Track</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="spotifyplayertrack.html" class="tsd-kind-icon">Spotify<wbr>Player<wbr>Track</a>
+						<a href="SpotifyPlaylist.html" class="tsd-kind-icon">Spotify<wbr>Playlist</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="spotifyplayertrack.html#artists" class="tsd-kind-icon">artists</a>
+								<a href="SpotifyPlaylist.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="spotifyplayertrack.html#duration" class="tsd-kind-icon">duration</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="spotifyplayertrack.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="spotifyplayertrack.html#image" class="tsd-kind-icon">image</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="spotifyplayertrack.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="spotifyplayertrack.html#uri" class="tsd-kind-icon">uri</a>
+								<a href="SpotifyPlaylist.html#tracks" class="tsd-kind-icon">tracks</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface">
-						<a href="spotifyplaylist.html" class="tsd-kind-icon">Spotify<wbr>Playlist</a>
+						<a href="SpotifyPlaylistArtist.html" class="tsd-kind-icon">Spotify<wbr>Playlist<wbr>Artist</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="spotifyplaylistartist.html" class="tsd-kind-icon">Spotify<wbr>Playlist<wbr>Artist</a>
+						<a href="SpotifyPlaylistTrack.html" class="tsd-kind-icon">Spotify<wbr>Playlist<wbr>Track</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="spotifyplaylisttrack.html" class="tsd-kind-icon">Spotify<wbr>Playlist<wbr>Track</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyErrorListener" class="tsd-kind-icon">Spotify<wbr>Error<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyListener" class="tsd-kind-icon">Spotify<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyListenerType" class="tsd-kind-icon">Spotify<wbr>Listener<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyStateListener" class="tsd-kind-icon">Spotify<wbr>State<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyStatusListener" class="tsd-kind-icon">Spotify<wbr>Status<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyWebPlaybackErrorType" class="tsd-kind-icon">Spotify<wbr>Web<wbr>Playback<wbr>Error<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../modules.html#SpotifyWebPlaybackMethod" class="tsd-kind-icon">Spotify<wbr>Web<wbr>Playback<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyWebPlaybackStateType" class="tsd-kind-icon">Spotify<wbr>Web<wbr>Playback<wbr>State<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#SpotifyWebPlaybackStatusType" class="tsd-kind-icon">Spotify<wbr>Web<wbr>Playback<wbr>Status<wbr>Type</a>
 					</li>
 				</ul>
 			</nav>
