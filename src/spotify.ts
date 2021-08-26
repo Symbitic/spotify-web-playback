@@ -1,14 +1,19 @@
 import {
+  SpotifyErrorListener,
+  SpotifyListener,
+  SpotifyListenerType,
+  SpotifyOAuthCallback,
   SpotifyPlayerStatus,
   SpotifyPlayerTrack,
   SpotifyPlaylist,
-  WebPlaybackAlbum,
-  WebPlaybackCallback,
-  WebPlaybackError,
-  WebPlaybackErrors,
-  WebPlaybackImage,
-  WebPlaybackPlayer,
-  WebPlaybackState
+  SpotifyStateListener,
+  SpotifyStatusListener,
+  SpotifyWebPlaybackAlbum,
+  SpotifyWebPlaybackError,
+  SpotifyWebPlaybackErrorType,
+  SpotifyWebPlaybackImage,
+  SpotifyWebPlaybackPlayer,
+  SpotifyWebPlaybackState,
 } from './spotify-types';
 
 export * from './spotify-types';
@@ -24,47 +29,25 @@ const EMPTY_TRACK: SpotifyPlayerTrack = {
   uri: ''
 };
 
-/** @hidden */
-function loadSpotifyPlayer(): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
-    const scriptTag = document.getElementById('spotify-player');
-
-    if (!scriptTag) {
-      const script = document.createElement('script');
-
-      script.id = 'spotify-player';
-      script.type = 'text/javascript';
-      script.async = false;
-      script.defer = true;
-      script.src = 'https://sdk.scdn.co/spotify-player.js';
-      script.onload = () => resolve();
-      script.onerror = () => reject(new Error('Error loading spotify-player.js'));
-
-      document.head.appendChild(script);
-    } else {
-      resolve();
-    }
-  });
-}
-
 /**
  * Spotify Web Player.
  */
 export class SpotifyPlayer {
   private readonly _baseUrl = 'https://api.spotify.com/v1/me';
 
-  private _player?: WebPlaybackPlayer;
+  private _player?: SpotifyWebPlaybackPlayer;
   private _name;
   private _volume;
   private _deviceId: string = '';
   private _token: string = '';
   private _playing: boolean = false;
   private _ready: boolean = false;
-  private _error: string = '';
-  private _errorType: WebPlaybackErrors | '' = '';
   private _position: number = 0;
   private _track: SpotifyPlayerTrack = EMPTY_TRACK;
   private _playlists: SpotifyPlaylist[] = [];
+  private _errorListeners: SpotifyErrorListener[] = [];
+  private _stateListeners: SpotifyStateListener[] = [];
+  private _statusListeners: SpotifyStatusListener[] = [];
 
   /**
    * Required scopes for a token.
@@ -100,20 +83,6 @@ export class SpotifyPlayer {
    */
   get ready() {
     return this._ready;
-  }
-
-  /**
-   * Error message. (empty if no error occurred)
-   */
-  get error() {
-    return this._error;
-  }
-
-  /**
-   * Error type. (empty if no error occurred)
-   */
-  get errorType() {
-    return this._errorType;
   }
 
   /**
@@ -162,7 +131,7 @@ export class SpotifyPlayer {
 
     await Promise.all([
       this.waitForReady(),
-      loadSpotifyPlayer()
+      SpotifyPlayer.loadSpotifyPlayer()
     ]);
 
     const name = this._name;
@@ -172,10 +141,10 @@ export class SpotifyPlayer {
     this._player = new window.Spotify.Player({
       name,
       volume,
-      getOAuthToken: (cb: WebPlaybackCallback) => {
+      getOAuthToken: (cb: SpotifyOAuthCallback) => {
         cb(token);
       },
-    }) as WebPlaybackPlayer;
+    }) as SpotifyWebPlaybackPlayer;
 
     return this.waitForConnection();
   }
@@ -195,19 +164,19 @@ export class SpotifyPlayer {
 
     this._player.addListener('player_state_changed', this.handlePlayerStateChanges);
 
-    this._player.addListener('initialization_error', (error: WebPlaybackError) => {
+    this._player.addListener('initialization_error', (error: SpotifyWebPlaybackError) => {
       this.handlePlayerErrors('initialization_error', error);
     });
 
-    this._player.addListener('authentication_error', (error: WebPlaybackError) => {
+    this._player.addListener('authentication_error', (error: SpotifyWebPlaybackError) => {
       this.handlePlayerErrors('authentication_error', error)
     });
 
-    this._player.addListener('account_error', (error: WebPlaybackError) => {
+    this._player.addListener('account_error', (error: SpotifyWebPlaybackError) => {
       this.handlePlayerErrors('account_error', error)
     });
 
-    this._player.addListener('playback_error', (error: WebPlaybackError) => {
+    this._player.addListener('playback_error', (error: SpotifyWebPlaybackError) => {
       this.handlePlayerErrors('playback_error', error)
     });
 
@@ -223,16 +192,45 @@ export class SpotifyPlayer {
     return new Promise((resolve) => {
       player.addListener('ready', async ({ device_id }) => {
         deviceConnected(device_id);
+        for (const cb of this._statusListeners) {
+          cb('ready');
+        }
         resolve(true);
       });
 
       player.addListener('not_ready', () => {
         deviceDisconnected();
+        for (const cb of this._statusListeners) {
+          cb('not_ready');
+        }
         resolve(false);
       });
 
       player.connect()
         //.then((ret: boolean) => resolve(ret));
+    });
+  }
+
+  /** @hidden */
+  static loadSpotifyPlayer(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const scriptTag = document.getElementById('spotify-player');
+
+      if (!scriptTag) {
+        const script = document.createElement('script');
+
+        script.id = 'spotify-player';
+        script.type = 'text/javascript';
+        script.async = false;
+        script.defer = true;
+        script.src = 'https://sdk.scdn.co/spotify-player.js';
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error('Error loading spotify-player.js'));
+
+        document.head.appendChild(script);
+      } else {
+        resolve();
+      }
     });
   }
 
@@ -369,13 +367,9 @@ export class SpotifyPlayer {
     return response.json();
   }
 
-  /**
-   * Get a list of playlists owned by the current user.
-   */
-  async getUsersPlaylists(): Promise<SpotifyPlaylist[]> {
+  private async getPlaylists(): Promise<SpotifyPlaylist[]> {
     let url = `${this._baseUrl}/playlists?limit=50`;
     let items: any = [];
-    let playlists: SpotifyPlaylist[] = [];
 
     // Get list of playlists.
     while (true) {
@@ -393,7 +387,7 @@ export class SpotifyPlayer {
     }
 
     // Get playlist items.
-    for (let item of items) {
+    return Promise.all(items.map(async (item: any) => {
       let url = `${item.tracks.href}?limit=100`;
       let tracks: any = [];
       while (true) {
@@ -415,10 +409,11 @@ export class SpotifyPlayer {
         name: item.name,
         tracks: tracks
       };
-      playlists.push(playlist);
-    }
+      return playlist;
+    }));
+  }
 
-    // Get user's favorites.
+  private async getFavorites() {
     const response = await fetch(`${this._baseUrl}/tracks?limit=50`, {
       headers: {
         'Authorization': `Bearer ${this._token}`
@@ -430,6 +425,18 @@ export class SpotifyPlayer {
       name: 'Your Music',
       tracks: data.items
     };
+
+    return favorites;
+  }
+
+  /**
+   * Get a list of playlists owned by the current user.
+   */
+  async getUsersPlaylists(): Promise<SpotifyPlaylist[]> {
+    let [ playlists, favorites ] = await Promise.all([
+      this.getPlaylists(),
+      this.getFavorites()
+    ]);
 
     // Set "Your Music" first.
     playlists = [ favorites, ...playlists ];
@@ -474,21 +481,97 @@ export class SpotifyPlayer {
     });
   }
 
+  /**
+   * Emitted whenever an error has occurred.
+   * @event
+   */
+  addListener(event: 'error', cb: SpotifyErrorListener): void;
+
+  /**
+   * Emitted whenever the player state has changed.
+   * @event
+   */
+  addListener(event: 'state', cb: SpotifyStateListener): void;
+
+  /**
+   * Emitted whenever the player readiness has changed.
+   */
+  addListener(event: 'ready', cb: SpotifyStatusListener): void;
+
   /** @hidden */
-  private getAlbumImage(album: WebPlaybackAlbum) {
+  addListener(event: SpotifyListenerType, cb: SpotifyListener) {
+    switch (event) {
+      case 'error':
+        this._errorListeners.push(cb as any);
+        break;
+      case 'state':
+        this._stateListeners.push(cb as any);
+        break;
+      case 'ready':
+        this._statusListeners.push(cb as any);
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Removes a single (or all) error listeners.
+   */
+  removeListener(event: 'error', cb?: SpotifyErrorListener): void;
+
+  /**
+   * Removes a single (or all) state listeners.
+   */
+  removeListener(event: 'state', cb?: SpotifyStateListener): void;
+
+  /**
+   * Removes a single (or all) status listeners.
+   */
+  removeListener(event: 'ready', cb?: SpotifyStatusListener): void;
+
+  /** @hidden */
+  removeListener(event: SpotifyListenerType, cb?: SpotifyListener) {
+    const filter = (fn: any) => {
+      if (cb) {
+        return fn !== cb;
+      } else {
+        return false;
+      }
+    }
+    switch (event) {
+      case 'error':
+        this._errorListeners = this._errorListeners.filter(filter);
+        break;
+      case 'state':
+        this._stateListeners = this._stateListeners.filter(filter);
+        break;
+      case 'ready':
+        this._statusListeners = this._statusListeners.filter(filter);
+        break;
+      default:
+        break;
+    }
+  }
+
+  /** @hidden */
+  private getAlbumImage(album: SpotifyWebPlaybackAlbum) {
     const width = Math.min(...album.images.map((d) => d.width));
-    const thumb: WebPlaybackImage =
-      album.images.find((d) => d.width === width) || ({} as WebPlaybackImage);
+    const thumb: SpotifyWebPlaybackImage =
+      album.images.find((d) => d.width === width) || ({} as SpotifyWebPlaybackImage);
 
     return thumb.url;
   }
 
   /** @hidden */
-  private async handlePlayerStateChanges(state: WebPlaybackState | null) {
+  private async handlePlayerStateChanges(state: SpotifyWebPlaybackState | null) {
     if (!state) {
       this._track = EMPTY_TRACK;
       this._position = 0;
       this._playing = false;
+      for (const cb of this._stateListeners) {
+        cb(state);
+      }
       return;
     }
 
@@ -511,12 +594,14 @@ export class SpotifyPlayer {
       name,
       uri
     };
+
+    for (const cb of this._stateListeners) {
+      cb(state);
+    }
   }
 
   /** @hidden */
-  private handlePlayerErrors(type: WebPlaybackErrors | '', error: WebPlaybackError) {
-    this._error = error.message;
-    this._errorType = type;
+  private handlePlayerErrors(type: SpotifyWebPlaybackErrorType | '', _error: SpotifyWebPlaybackError) {
     this._ready = false;
 
     if (this._player && type !== 'playback_error') {
@@ -525,6 +610,10 @@ export class SpotifyPlayer {
       this._player.removeListener('authentication_error');
       this._player.removeListener('account_error');
       this._player.disconnect();
+    }
+
+    for (const cb of this._errorListeners) {
+      cb(type as SpotifyWebPlaybackErrorType);
     }
   }
 }

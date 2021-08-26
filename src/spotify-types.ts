@@ -2,37 +2,45 @@
  * @todo https://developer.spotify.com/documentation/web-playback-sdk/reference/
  */
 
-/** @hidden */
-type WebPlaybackMethod<T = void> = () => Promise<T>;
+/**
+ * Generic method type.
+ */
+export type SpotifyWebPlaybackMethod<T = void, R = void> = (args: T) => R;
 
 /** @hidden */
-export type WebPlaybackCallback = (token: string) => void;
+export type SpotifyOAuthCallback = SpotifyWebPlaybackMethod<string, Promise<void>>;
 
-/** @hidden */
-export type WebPlaybackStatuses = 'ready' | 'not_ready';
+/**
+ * Status events.
+ */
+export type SpotifyWebPlaybackStatusType = 'ready' | 'not_ready';
 
-/** @hidden */
-export type WebPlaybackStates = 'player_state_changed';
+/**
+ * State change event.
+ */
+export type SpotifyWebPlaybackStateType = 'player_state_changed';
 
-/** @hidden */
-export type WebPlaybackErrors =
+/**
+ * Error events.
+ */
+export type SpotifyWebPlaybackErrorType =
   | 'initialization_error'
   | 'authentication_error'
   | 'account_error'
   | 'playback_error';
 
 /** @hidden */
-export interface WebPlaybackError {
-  message: WebPlaybackErrors;
+export interface SpotifyWebPlaybackError {
+  message: SpotifyWebPlaybackErrorType;
 }
 
 /** @hidden */
-export interface WebPlaybackReady {
+export interface SpotifyWebPlaybackReady {
   device_id: string;
 }
 
 /** @hidden */
-export interface WebPlaybackState {
+export interface SpotifyWebPlaybackState {
   bitrate: number;
   context: {
     metadata: Record<string, unknown>;
@@ -53,36 +61,36 @@ export interface WebPlaybackState {
   shuffle: boolean;
   timestamp: number;
   track_window: {
-    current_track: WebPlaybackTrack;
-    next_tracks: WebPlaybackTrack[];
-    previous_tracks: WebPlaybackTrack[];
+    current_track: SpotifyWebPlaybackTrack;
+    next_tracks: SpotifyWebPlaybackTrack[];
+    previous_tracks: SpotifyWebPlaybackTrack[];
   };
 }
 
 /** @hidden */
-export interface WebPlaybackAlbum {
-  images: WebPlaybackImage[];
+export interface SpotifyWebPlaybackArtist {
   name: string;
   uri: string;
 }
 
 /** @hidden */
-export interface WebPlaybackArtist {
-  name: string;
-  uri: string;
-}
-
-/** @hidden */
-export interface WebPlaybackImage {
+export interface SpotifyWebPlaybackImage {
   height: number;
   url: string;
   width: number;
 }
 
 /** @hidden */
-export interface WebPlaybackTrack {
-  album: WebPlaybackAlbum;
-  artists: WebPlaybackArtist[];
+export interface SpotifyWebPlaybackAlbum {
+  images: SpotifyWebPlaybackImage[];
+  name: string;
+  uri: string;
+}
+
+/** @hidden */
+export interface SpotifyWebPlaybackTrack {
+  album: SpotifyWebPlaybackAlbum;
+  artists: SpotifyWebPlaybackArtist[];
   duration_ms: number;
   id: string;
   is_playable: boolean;
@@ -97,35 +105,70 @@ export interface WebPlaybackTrack {
   uri: string;
 }
 
+/**
+ * Event callbacks.
+ */
+export type SpotifyListenerType = 'error' | 'state' | 'ready';
+
+/**
+ * An event listener for when an error occurs.
+ */
+export type SpotifyErrorListener = SpotifyWebPlaybackMethod<SpotifyWebPlaybackErrorType>;
+
+/**
+ * An event listener for when the playback state changes.
+ */
+export type SpotifyStateListener = SpotifyWebPlaybackMethod<SpotifyWebPlaybackState | null>;
+
+/**
+ * An event listener for when the player status changes.
+ */
+export type SpotifyStatusListener = SpotifyWebPlaybackMethod<SpotifyWebPlaybackStatusType>;
+
+/**
+ * Event listeners.
+ */
+export type SpotifyListener = SpotifyErrorListener | SpotifyStateListener | SpotifyStatusListener;
+
+
 /** @hidden */
-export interface WebPlaybackPlayer {
+export type SpotifyErrorCallback = SpotifyWebPlaybackMethod<SpotifyWebPlaybackError>;
+
+/** @hidden */
+export type SpotifyStateCallback = SpotifyWebPlaybackMethod<SpotifyWebPlaybackState | null>;
+
+/** @hidden */
+export type SpotifyStatusCallback = SpotifyWebPlaybackMethod<SpotifyWebPlaybackReady>;
+
+/** @hidden */
+export interface SpotifyWebPlaybackPlayer {
   _options: {
-    getOAuthToken: WebPlaybackCallback;
+    getOAuthToken: SpotifyOAuthCallback;
     name: string;
     id: string;
     volume: number;
   };
   addListener: {
-    (event: WebPlaybackErrors, callback: (d: WebPlaybackError) => void): boolean;
-    (event: WebPlaybackStates, callback: (d: WebPlaybackState | null) => void): boolean;
-    (event: WebPlaybackStatuses, callback: (d: WebPlaybackReady) => void): boolean;
+    (event: SpotifyWebPlaybackErrorType, callback: SpotifyErrorCallback): boolean;
+    (event: SpotifyWebPlaybackStateType, callback: SpotifyStateCallback): boolean;
+    (event: SpotifyWebPlaybackStatusType, callback: SpotifyStatusCallback): boolean;
   };
-  connect: WebPlaybackMethod<boolean>;
-  disconnect: () => void;
-  getCurrentState: () => Promise<WebPlaybackState | null>;
-  getVolume: WebPlaybackMethod<number>;
-  pause: WebPlaybackMethod;
-  nextTrack: WebPlaybackMethod;
-  previousTrack: WebPlaybackMethod;
+  connect: SpotifyWebPlaybackMethod<void, boolean>;
+  disconnect: SpotifyWebPlaybackMethod;
+  getCurrentState: SpotifyWebPlaybackMethod<void, Promise<SpotifyWebPlaybackState | null>>;
+  getVolume: SpotifyWebPlaybackMethod<void, number>;
+  pause: SpotifyWebPlaybackMethod;
+  nextTrack: SpotifyWebPlaybackMethod;
+  previousTrack: SpotifyWebPlaybackMethod;
   removeListener: (
-    event: WebPlaybackErrors | WebPlaybackStates | WebPlaybackStatuses,
-    callback?: () => void,
+    event: SpotifyWebPlaybackErrorType | SpotifyWebPlaybackStateType | SpotifyWebPlaybackStatusType,
+    callback?: SpotifyWebPlaybackMethod,
   ) => boolean;
-  resume: WebPlaybackMethod;
+  resume: SpotifyWebPlaybackMethod;
   seek: (positionMS: number) => Promise<void>;
-  setName: (n: string) => Promise<void>;
-  setVolume: (n: number) => Promise<void>;
-  togglePlay: WebPlaybackMethod;
+  setName: (name: string) => Promise<void>;
+  setVolume: (volume: number) => Promise<void>;
+  togglePlay: SpotifyWebPlaybackMethod;
 }
 
 /**
