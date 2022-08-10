@@ -150,6 +150,27 @@ export class SpotifyPlayer {
   }
 
   /**
+   * Wait for the element to be activated for mobile devices
+   *
+   * @returns Promise that resolves to a boolean indicating if the activation
+   * was successful.
+   */
+
+  activateElement() {
+    if (!this._player) {
+      return Promise.resolve(false)
+    }
+    const player = this._player
+    return new Promise( resolve => {
+      player.activateElement().then(() => {
+        resolve(true)
+      }).catch(() => {
+        resolve(false)
+      })
+    })
+  }
+
+  /**
    * Wait for the player to connect and emit the 'ready' signal.
    *
    * @returns Promise that resolves to a boolean indicating if the connection
