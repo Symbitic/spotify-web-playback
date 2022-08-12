@@ -154,6 +154,7 @@ export interface SpotifyWebPlaybackPlayer {
     (event: SpotifyWebPlaybackStatusType, callback: SpotifyStatusCallback): boolean;
   };
   connect: SpotifyWebPlaybackMethod<void, boolean>;
+  activateElement: SpotifyWebPlaybackMethod<void, Promise<void>>;
   disconnect: SpotifyWebPlaybackMethod;
   getCurrentState: SpotifyWebPlaybackMethod<void, Promise<SpotifyWebPlaybackState | null>>;
   getVolume: SpotifyWebPlaybackMethod<void, number>;
