@@ -142,7 +142,7 @@ export class SpotifyPlayer {
       name,
       volume,
       getOAuthToken: (cb: SpotifyOAuthCallback) => {
-        cb(token);
+        cb(this._token);
       },
     }) as SpotifyWebPlaybackPlayer;
 
@@ -161,7 +161,7 @@ export class SpotifyPlayer {
       return Promise.resolve(false)
     }
     const player = this._player
-    return new Promise( resolve => {
+    return new Promise(resolve => {
       player.activateElement().then(() => {
         resolve(true)
       }).catch(() => {
@@ -228,7 +228,7 @@ export class SpotifyPlayer {
       });
 
       player.connect()
-        //.then((ret: boolean) => resolve(ret));
+      //.then((ret: boolean) => resolve(ret));
     });
   }
 
@@ -283,7 +283,7 @@ export class SpotifyPlayer {
         uris: items,
         offset: { position: offset }
       });
-    } else if (items)  {
+    } else if (items) {
       const isArtist = items.indexOf('artist') >= 0;
       const isTrack = items.indexOf('track') >= 0;
       let position;
@@ -294,7 +294,7 @@ export class SpotifyPlayer {
 
       if (isTrack) {
         body = JSON.stringify({
-          uris: [ items ],
+          uris: [items],
           offset: position
         });
       } else {
@@ -454,13 +454,13 @@ export class SpotifyPlayer {
    * Get a list of playlists owned by the current user.
    */
   async getUsersPlaylists(): Promise<SpotifyPlaylist[]> {
-    let [ playlists, favorites ] = await Promise.all([
+    let [playlists, favorites] = await Promise.all([
       this.getPlaylists(),
       this.getFavorites()
     ]);
 
     // Set "Your Music" first.
-    playlists = [ favorites, ...playlists ];
+    playlists = [favorites, ...playlists];
 
     playlists = playlists.map((item: any) => ({
       name: item.name,
